@@ -2,7 +2,6 @@ import DarkModeToggle from "./dark-mode-toggle";
 import getServerDarkMode from "@/hooks/get-server-dark-mode";
 import {createClient} from "@/lib/supabase/server";
 import {variants, sizes} from "@/lib/variants";
-import Button from "@/components/button";
 import Link from "next/link";
 import {use} from "react";
 import {SquareUser, KeySquare} from "lucide-react";
@@ -20,10 +19,10 @@ export default function PageHeader({ className }) {
 
             <div className="flex items-center">
                 <DarkModeToggle defaultMode={theme}/>
-                {user && <Button variant="ghost" size="sm" className="flex items-center space-x-1">
+                {user && <Link href="/dashboard/settings" className={`flex items-center space-x-1 ${variants['ghost']} ${sizes['sm']}`}>
                     <SquareUser  className="w-6 h-6"/>
                     <span>{user.email}</span>
-                </Button>}
+                </Link>}
                 {user && <LogOutButton/>}
                 {!user && <Link href="/login" className={`${variants['ghost']} ${sizes['sm']}`}>
                     <KeySquare className="w-6 h-6"/>
