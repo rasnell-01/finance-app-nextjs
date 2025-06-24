@@ -1,5 +1,4 @@
 'use client'
-
 import Button from "@/components/button";
 import Input from "@/components/input";
 import Label from "@/components/label";
@@ -13,7 +12,7 @@ import {zodResolver} from "@hookform/resolvers/zod";
 import {useState} from "react";
 import {useRouter} from "next/navigation";
 
-export default function TransactionForm() {
+export default function TransactionForm({ defaultValues, onSubmit: onSubmitProp, submitLabel = "Save" }) {
     const {
         register,
         handleSubmit,
@@ -22,7 +21,8 @@ export default function TransactionForm() {
         setValue,
     } = useForm({
         mode: "onTouched",
-        resolver: zodResolver(transactionSchema)
+        resolver: zodResolver(transactionSchema),
+        defaultValues,
     })
     const router = useRouter()
     const [isSaving, setSaving] = useState(false)
@@ -33,7 +33,7 @@ export default function TransactionForm() {
         setSaving(true)
         setLastError(null)
         try {
-            await createTransaction(data)
+            await (onSubmitProp ? onSubmitProp(data) : createTransaction(data))
             router.push('/dashboard')
         } catch (error) {
             setLastError(error)
@@ -81,7 +81,7 @@ export default function TransactionForm() {
 
             <div>
                 <Label className="mb-1">Date</Label>
-                <Input {...register("created_at")} />
+                <Input type="date" {...register("created_at")} />
                 <FormError error={errors.created_at} />
             </div>
 
@@ -102,7 +102,9 @@ export default function TransactionForm() {
             <div>
                 {lastError && <FormError error={lastError} />}
             </div>
-            <Button type="submit" disabled={isSaving}>Save</Button>
+            <Button type="submit" variant="ghost" disabled={isSaving}>
+                {isSaving ? (submitLabel === "Save" ? "Saving..." : "Updating...") : submitLabel}
+            </Button>
         </div>
     </form>
 }

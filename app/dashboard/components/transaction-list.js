@@ -1,11 +1,11 @@
 'use client'
-import Button from "@/components/button"
-import Separator from "@/components/separator"
-import TransactionItem from "@/components/transaction-item"
-import TransactionSummaryItem from "@/components/transaction-summary-item"
-import { fetchTransactions } from "@/lib/actions"
-import { groupAndSumTransactionsByDate } from "@/lib/utils"
-import { useState } from "react"
+import Button from "@/components/button";
+import Separator from "@/components/separator";
+import TransactionItem from "@/components/transaction-item";
+import TransactionSummaryItem from "@/components/transaction-summary-item";
+import { fetchTransactions } from "@/lib/actions";
+import { groupAndSumTransactionsByDate } from "@/lib/utils";
+import { useState } from "react";
 import {LoaderPinwheel} from "lucide-react";
 
 export default function TransactionList({range, initialTransactions}) {
@@ -19,7 +19,7 @@ export default function TransactionList({range, initialTransactions}) {
         setLoading(true)
         let nextTransactions = null
         try {
-            const nextTransactions = await fetchTransactions(range, offset, 10)
+            nextTransactions = await fetchTransactions(range, offset, 10)
             setButtonHidden(nextTransactions.length === 0)
             setOffset(prevValue => prevValue + 10)
             setTransactions(prevTransactions => [
@@ -28,6 +28,19 @@ export default function TransactionList({range, initialTransactions}) {
             ])
         }finally {
             setLoading(false)
+        }
+    }
+
+    const handleRemoved = (id) => async () => {
+        setLoading(true);
+        try {
+            setTransactions(prev => prev.filter(t => t.id !== id));
+            const refreshed = await fetchTransactions(range, 0, offset);
+            setTransactions(refreshed);
+            setOffset(refreshed.length);
+            setButtonHidden(refreshed.length < offset);
+        } finally {
+            setLoading(false);
         }
     }
 
@@ -40,7 +53,9 @@ export default function TransactionList({range, initialTransactions}) {
                         <Separator />
                         <section className="space-y-4">
                             {transactions.map(transaction => <div key={transaction.id}>
-                                <TransactionItem {...transaction} />
+                                <TransactionItem
+                                    {...transaction}
+                                    onRemoved={handleRemoved(transaction.id)}/>
                             </div>)}
                         </section>
                     </div>
@@ -48,10 +63,12 @@ export default function TransactionList({range, initialTransactions}) {
             {transactions.length === 0 && <div className="text-center text-gray-400 dark:text-gray-500">No transactions found</div>}
             {!buttonHidden && <div className="flex justify-center">
                 <Button variant="ghost" onClick={handleClick} disabled={loading}>
-                    <div className="flex items-center space-x-1">
-                        {loading &&<LoaderPinwheel className="animate-spin"/>}
+                    <div className="flex items-center justify-center min-h-[1.5em]">
+                        {loading
+                            ? <LoaderPinwheel className="animate-spin" />
+                            : <span>Load More</span>
+                        }
                     </div>
-                    <div>Load More</div>
                 </Button>
             </div>}
         </div>
