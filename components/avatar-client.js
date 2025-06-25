@@ -10,13 +10,19 @@ const AvatarClient = forwardRef(function AvatarClient({ userId, width = 32, heig
     const fetchAvatar = useCallback(async () => {
         if (!userId) return setAvatarUrl(null);
         const supabase = createClientInstance();
-        const filePath = `${userId}.jpg`;
-        const { data, error } = await supabase.storage
-            .from("avatars")
-            .createSignedUrl(filePath, 60 * 60);
 
-        if (error) setAvatarUrl(null);
-        else setAvatarUrl(`${data.signedUrl}&t=${Date.now()}`);
+        for (const ext of ["jpg", "jpeg", "png"]) {
+            const filePath = `${userId}.${ext}`;
+            const { data, error } = await supabase.storage
+                .from("avatars")
+                .createSignedUrl(filePath, 60 * 60);
+
+            if (!error && data?.signedUrl) {
+                setAvatarUrl(`${data.signedUrl}&t=${Date.now()}`);
+                return;
+            }
+        }
+        setAvatarUrl(null);
     }, [userId]);
 
     useImperativeHandle(ref, () => ({

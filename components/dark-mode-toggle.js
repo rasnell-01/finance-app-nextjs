@@ -1,5 +1,4 @@
-'use client'
-
+"use client"
 import useDarkMode from '@/hooks/use-dark-mode'
 import Button from './button'
 import {Moon, Sun} from 'lucide-react'

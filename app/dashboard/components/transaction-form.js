@@ -81,13 +81,17 @@ export default function TransactionForm({ defaultValues, onSubmit: onSubmitProp,
 
             <div>
                 <Label className="mb-1">Date</Label>
-                <Input type="date" {...register("created_at")} />
+                <Input
+                  type="date"
+                  {...register("created_at")}
+                  defaultValue={defaultValues?.created_at || new Date().toISOString().slice(0, 10)}
+                />
                 <FormError error={errors.created_at} />
             </div>
 
             <div>
                 <Label className="mb-1">Amount</Label>
-                <Input type="number" {...register("amount")} />
+                <Input type="number" step="any" {...register("amount")} />
                 <FormError error={errors.amount} />
             </div>
 

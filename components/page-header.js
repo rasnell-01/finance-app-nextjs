@@ -8,8 +8,6 @@ import Link from "next/link";
 import {use} from "react";
 import {KeySquare} from "lucide-react";
 
-
-
 export default function PageHeader({ className }) {
     const theme = use(getServerDarkMode());
     const supabase = use(createClient());

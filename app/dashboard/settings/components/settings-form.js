@@ -1,4 +1,3 @@
-'use client'
 import SettingsFormProfile from "@/app/dashboard/settings/components/settings-form-profile";
 import SettingsFormPreferences from "@/app/dashboard/settings/components/settings-form-preferences";
 import SettingsFormDateTime from "@/app/dashboard/settings/components/settings-form-date-time";

@@ -1,17 +1,11 @@
-import { useMemo } from "react";
-import { userDefaults } from "@/lib/user-defaults";
-import { useUser } from "@/lib/use-user";
+import { useMemo } from "react"
 
-export const useFormatCurrency = (amount, currency, locale) => {
-  const { user } = useUser();
-
-  const finalCurrency =
-      currency || user?.user_metadata?.currency || userDefaults.currency;
-  const finalLocale =
-      locale || user?.user_metadata?.locale || "en-US";
+export const useFormatCurrency = (amount) => {
+  const formatCurrency = (amount) =>
+      new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(amount)
 
   return useMemo(
-      () => new Intl.NumberFormat(finalLocale, { style: 'currency', currency: finalCurrency }).format(amount),
-      [amount, finalCurrency, finalLocale]
-  );
-};
+      () => formatCurrency(amount),
+      [amount]
+  )
+}

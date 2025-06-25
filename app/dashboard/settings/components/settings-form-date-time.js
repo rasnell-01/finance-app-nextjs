@@ -1,3 +1,4 @@
+'use client'
 import AlertError from "@/components/alert-error";
 import AlertSuccess from "@/components/alert-success";
 import Label from "@/components/label";
