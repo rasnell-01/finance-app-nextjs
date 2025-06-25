@@ -1,6 +1,7 @@
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
-import getServerDarkMode from "@/hooks/get-server-dark-mode";
+import {UserProvider} from "@/lib/use-user";
+import {userDefaults} from "@/lib/user-defaults";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -21,14 +22,14 @@ export const metadata = {
 };
 
 export default function RootLayout({ children }) {
-  const theme = getServerDarkMode()
-  return (
-      <html lang="en" className={theme}>
-      <body
-          className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-      >
-      {children}
-      </body>
-      </html>
-  );
+    const theme = userDefaults.theme;
+    return (
+        <UserProvider>
+            <html lang="en" className={theme}>
+            <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
+            {children}
+            </body>
+            </html>
+        </UserProvider>
+    );
 }

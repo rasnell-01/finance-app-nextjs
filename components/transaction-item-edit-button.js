@@ -1,3 +1,4 @@
+'use client'
 import Button from "@/components/button";
 import { SquarePen } from "lucide-react";
 import { useRouter } from "next/navigation";

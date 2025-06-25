@@ -13,7 +13,7 @@ import {KeySquare} from "lucide-react";
 export default function PageHeader({ className }) {
     const theme = use(getServerDarkMode());
     const supabase = use(createClient());
-    const {data: {user}, error} = use(supabase.auth.getUser());
+    const {data: {user}} = use(supabase.auth.getUser());
     return (
         <header className={`flex justify-between items-center ${className}`}>
             <Link href="/dashboard" className="text-xl hover:underline underline-offset-8 decoration-2">

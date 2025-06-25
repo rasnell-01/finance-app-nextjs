@@ -1,5 +1,6 @@
 import Trend from "@/components/trend";
 import PageHeader from "@/components/page-header";
+import PageFooter from "@/components/page-footer";
 import TransactionItem from "@/components/transaction-item";
 import TransactionSummaryItem from "@/components/transaction-summary-item";
 import Button from "@/components/button";
@@ -118,6 +119,13 @@ export default function Page() {
           </div>
         </div>
       </div>
+
+      <div>
+        <h2 className="mb-4 text-lg font-mono">PageFooter</h2>
+        <Separator />
+        <div><PageFooter /></div>
+      </div>
+
     </main>
   )
 }

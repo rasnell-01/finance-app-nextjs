@@ -1,7 +1,15 @@
 import Image from "next/image";
+import PageHeader from "@/components/page-header";
+import PageFooter from "@/components/page-footer";
 
 export default function Home() {
   return (
-   <>Hello</> 
+   <>
+     <PageHeader />
+     <main>
+       <h1>Home</h1>
+     </main>
+     <PageFooter />
+   </>
   );
 }
