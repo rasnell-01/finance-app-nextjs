@@ -6,17 +6,13 @@ export async function middleware(request) {
     const { data: { user }} = await supabase.auth.getUser()
 
     if (!user && request.nextUrl.pathname.startsWith('/dashboard')) {
-        return Response.redirect(
-            '/login',
-            302
-        )
+        const loginUrl = new URL('/login', request.nextUrl.origin);
+        return Response.redirect(loginUrl, 302);
     }
 
     if (user && request.nextUrl.pathname.startsWith('/login')) {
-        return Response.redirect(new URL(
-            '/dashboard',
-            request.url
-        ))
+        const dashboardUrl = new URL('/dashboard', request.nextUrl.origin);
+        return Response.redirect(dashboardUrl, 302);
     }
 
     return await updateSession(request)
