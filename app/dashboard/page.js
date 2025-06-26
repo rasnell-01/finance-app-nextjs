@@ -10,6 +10,7 @@ import Range from "./components/range";
 import TransactionListWrapper from "./components/transaction-list-wrapper";
 import {createClient} from "@/lib/supabase/server";
 import { ErrorBoundary } from "react-error-boundary";
+import {ensureUserMetadata} from "@/lib/actions";
 
 export default async function Page({ searchParams }) {
   const params = await searchParams;
@@ -17,6 +18,7 @@ export default async function Page({ searchParams }) {
 
   const supabase = await createClient()
   console.log(await supabase.auth.getUser())
+  await ensureUserMetadata(supabase);
 
   return (<div className="space-y-8">
     <section className="flex justify-between items-center">

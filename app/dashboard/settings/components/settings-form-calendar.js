@@ -9,15 +9,19 @@ import {initialState} from "@/lib/consts";
 import {useActionState} from "react";
 
 export default function SettingsFormCalendar({ defaults }) {
-    const [calendarState, calendarAction] = useActionState(updateCalendarSettings, initialState);
+    const [calendarState = initialState, calendarAction] = useActionState(updateCalendarSettings, initialState);
 
     return (
         <>
             <hr className="my-8" />
             <h2 className="text-xl font-semibold mb-2">Calendar Display Settings</h2>
             <form className="space-y-4" action={calendarAction}>
-                {calendarState?.error && <AlertError>{calendarState?.message}</AlertError>}
-                {!calendarState?.error && calendarState?.message.length > 0 && <AlertSuccess>{calendarState?.message}</AlertSuccess>}
+                {calendarState?.error && calendarState?.message && (
+                    <AlertError>{calendarState.message}</AlertError>
+                )}
+                {!calendarState?.error && calendarState?.message && (
+                    <AlertSuccess>{calendarState.message}</AlertSuccess>
+                )}
 
                 <Label htmlFor="showWeekNumbers">Show Week Numbers</Label>
                 <Input type="checkbox" name="showWeekNumbers" id="showWeekNumbers" defaultChecked={defaults?.showWeekNumbers} />

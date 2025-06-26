@@ -10,13 +10,16 @@ import {themeColors, CURRENCY_SYMBOLS} from "@/lib/consts";
 import {useActionState} from "react";
 
 export default function SettingsFormPreferences({defaults}) {
-    const [prefsState, prefsAction] = useActionState(updatePreferences, initialState);
+    const [prefsState = initialState, prefsAction,] = useActionState(updatePreferences, initialState);
     return <>
         {/* Preferences Section */}
         <form className="space-y-4" action={prefsAction}>
-            {prefsState?.error && <AlertError>{prefsState?.message}</AlertError>}
-            {!prefsState?.error && prefsState?.message.length > 0 && <AlertSuccess>{prefsState?.message}</AlertSuccess>}
-
+            {prefsState?.error && prefsState?.message && (
+                <AlertError>{prefsState.message}</AlertError>
+            )}
+            {!prefsState?.error && prefsState?.message && (
+                <AlertSuccess>{prefsState.message}</AlertSuccess>
+            )}
             <Label htmlFor="theme">Theme</Label>
             <Select name="theme" id="theme" defaultValue={defaults?.theme}>
                 {Object.entries(themeColors).map(([value, label]) => (

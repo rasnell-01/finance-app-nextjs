@@ -8,13 +8,16 @@ import {initialState} from "@/lib/consts";
 import {useActionState} from "react";
 
 export default function SettingsFormDateTime({defaults}) {
-    const [dtState, dtAction] = useActionState(updateDateTimeSettings, initialState);
+    const [dtState = initialState, dtAction] = useActionState(updateDateTimeSettings, initialState);
     return <>
         {/* Date/Time Section */}
         <form className="space-y-4" action={dtAction}>
-            {dtState?.error && <AlertError>{dtState?.message}</AlertError>}
-            {!dtState?.error && dtState?.message.length > 0 && <AlertSuccess>{dtState?.message}</AlertSuccess>}
-
+            {dtState?.error && dtState?.message && (
+                <AlertError>{dtState.message}</AlertError>
+            )}
+            {!dtState?.error && dtState?.message && (
+                <AlertSuccess>{dtState.message}</AlertSuccess>
+            )}
             <Label htmlFor="dateFormat">Date Format</Label>
             <select name="dateFormat" id="dateFormat" defaultValue={defaults?.dateFormat} className="input input-bordered w-full">
                 <option value="MM/DD/YYYY">MM/DD/YYYY (e.g. 06/25/2025)</option>

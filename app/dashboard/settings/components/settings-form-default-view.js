@@ -9,12 +9,16 @@ import {initialState} from "@/lib/consts";
 import {useActionState} from "react";
 
 export default function SettingsFormDefaultView({defaults}) {
-    const [defaultViewState, defaultViewAction] = useActionState(updateDefaultView, initialState);
+    const [defaultViewState = initialState, defaultViewAction] = useActionState(updateDefaultView, initialState);
     return <>
         {/* Default transactions view */}
         <form className="space-y-4" action={defaultViewAction}>
-            {defaultViewState?.error && <AlertError>{defaultViewState?.message}</AlertError>}
-            {!defaultViewState?.error && defaultViewState?.message.length > 0 && <AlertSuccess>{defaultViewState?.message}</AlertSuccess>}
+            {defaultViewState?.error && defaultViewState?.message && (
+                <AlertError>{defaultViewState.message}</AlertError>
+            )}
+            {!defaultViewState?.error && defaultViewState?.message && (
+                <AlertSuccess>{defaultViewState.message}</AlertSuccess>
+            )}
 
             <Label htmlFor='defaultView'>Default transactions view</Label>
             <DateRangeSelect name="defaultView" id="defaultView" defaultValue={defaults?.defaultView} />

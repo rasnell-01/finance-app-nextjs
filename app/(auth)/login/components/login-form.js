@@ -1,5 +1,4 @@
 'use client'
-
 import Input from "@/components/input";
 import {login} from "@/lib/actions";
 import SubmitButton from "@/components/submit-button";
