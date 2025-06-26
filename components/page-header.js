@@ -1,5 +1,3 @@
-import DarkModeToggle from "./dark-mode-toggle";
-import getServerDarkMode from "@/hooks/get-server-dark-mode";
 import {createClient} from "@/lib/supabase/server";
 import {variants, sizes} from "@/lib/variants";
 import LogOutButton from "./log-out-button";
@@ -9,7 +7,6 @@ import {use} from "react";
 import {KeySquare} from "lucide-react";
 
 export default function PageHeader({ className }) {
-    const theme = use(getServerDarkMode());
     const supabase = use(createClient());
     const {data: {user}} = use(supabase.auth.getUser());
     return (
@@ -19,7 +16,6 @@ export default function PageHeader({ className }) {
             </Link>
 
             <div className="flex items-center">
-                <DarkModeToggle defaultMode={theme}/>
                 {user && <Link href="/dashboard/settings" className={`flex items-center space-x-1 ${variants['ghost']} ${sizes['sm']}`}>
                     <Avatar />
                     <span>{user?.email}</span>

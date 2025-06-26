@@ -1,16 +1,15 @@
 'use client'
-import { useFormState } from "react-dom";
 import SubmitButton from "@/components/submit-button";
 import Label from "@/components/label";
 import Input from "@/components/input";
 import AlertError from "@/components/alert-error";
 import AlertSuccess from "@/components/alert-success";
 import { updateCalendarSettings } from "@/lib/actions";
-
-const initialState = { message: '', error: false };
+import {initialState} from "@/lib/consts";
+import {useActionState} from "react";
 
 export default function SettingsFormCalendar({ defaults }) {
-    const [calendarState, calendarAction] = useFormState(updateCalendarSettings, initialState);
+    const [calendarState, calendarAction] = useActionState(updateCalendarSettings, initialState);
 
     return (
         <>

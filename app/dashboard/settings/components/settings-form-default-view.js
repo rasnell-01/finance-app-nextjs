@@ -4,16 +4,12 @@ import AlertSuccess from "@/components/alert-success";
 import Label from "@/components/label";
 import DateRangeSelect from "@/components/date-range-select";
 import SubmitButton from "@/components/submit-button";
-import {useFormState} from "react-dom";
 import {updateDefaultView} from "@/lib/actions";
-
-const initialState = {
-    message: '',
-    error: false
-}
+import {initialState} from "@/lib/consts";
+import {useActionState} from "react";
 
 export default function SettingsFormDefaultView({defaults}) {
-    const [defaultViewState, defaultViewAction] = useFormState(updateDefaultView, initialState);
+    const [defaultViewState, defaultViewAction] = useActionState(updateDefaultView, initialState);
     return <>
         {/* Default transactions view */}
         <form className="space-y-4" action={defaultViewAction}>

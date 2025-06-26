@@ -2,15 +2,7 @@ import { useMemo } from "react";
 import { useUserSettings } from "@/lib/user-settings";
 import { defaultSettings } from "@/lib/defaultSettings";
 import { format as formatDateFns } from "date-fns";
-
-// Mapping for user-friendly formats to date-fns patterns
-const FORMAT_MAP = {
-    "MM/DD/YYYY": "MM/dd/yyyy",
-    "DD/MM/YYYY": "dd/MM/yyyy",
-    "YYYY-MM-DD": "yyyy-MM-dd",
-    "MMM D, YYYY": "MMM d, yyyy",
-    "DD MMM YYYY": "dd MMM yyyy",
-};
+import {FORMAT_MAP} from "@/lib/consts";
 
 export function useFormatDate(date, defaultFormat = defaultSettings.dateFormat) {
     const { settings } = useUserSettings();

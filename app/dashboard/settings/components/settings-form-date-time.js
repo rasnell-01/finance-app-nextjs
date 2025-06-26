@@ -3,17 +3,12 @@ import AlertError from "@/components/alert-error";
 import AlertSuccess from "@/components/alert-success";
 import Label from "@/components/label";
 import SubmitButton from "@/components/submit-button";
-import {useFormState} from "react-dom";
 import {updateDateTimeSettings} from "@/lib/actions";
-
-const initialState = {
-    message: '',
-    error: false
-}
-
+import {initialState} from "@/lib/consts";
+import {useActionState} from "react";
 
 export default function SettingsFormDateTime({defaults}) {
-    const [dtState, dtAction] = useFormState(updateDateTimeSettings, initialState);
+    const [dtState, dtAction] = useActionState(updateDateTimeSettings, initialState);
     return <>
         {/* Date/Time Section */}
         <form className="space-y-4" action={dtAction}>

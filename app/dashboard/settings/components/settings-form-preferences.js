@@ -2,18 +2,15 @@
 import AlertError from "@/components/alert-error";
 import AlertSuccess from "@/components/alert-success";
 import Label from "@/components/label";
-import Input from "@/components/input";
 import SubmitButton from "@/components/submit-button";
-import {useFormState} from "react-dom";
+import Select from "@/components/select";
 import {updatePreferences} from "@/lib/actions";
-
-const initialState = {
-    message: '',
-    error: false
-}
+import {initialState} from "@/lib/consts";
+import {themeColors, CURRENCY_SYMBOLS} from "@/lib/consts";
+import {useActionState} from "react";
 
 export default function SettingsFormPreferences({defaults}) {
-    const [prefsState, prefsAction] = useFormState(updatePreferences, initialState);
+    const [prefsState, prefsAction] = useActionState(updatePreferences, initialState);
     return <>
         {/* Preferences Section */}
         <form className="space-y-4" action={prefsAction}>
@@ -21,17 +18,20 @@ export default function SettingsFormPreferences({defaults}) {
             {!prefsState?.error && prefsState?.message.length > 0 && <AlertSuccess>{prefsState?.message}</AlertSuccess>}
 
             <Label htmlFor="theme">Theme</Label>
-            <select name="theme" id="theme" defaultValue={defaults?.theme} className="input input-bordered w-full">
-                <option value="light">Light</option>
-                <option value="dark">Dark</option>
-                <option value="system">System</option>
-            </select>
+            <Select name="theme" id="theme" defaultValue={defaults?.theme}>
+                {Object.entries(themeColors).map(([value, label]) => (
+                    <option key={value} value={value}>{label.charAt(0).toUpperCase() + label.slice(1)}</option>
+                ))}
+            </Select>
 
             <Label htmlFor="currency">Currency</Label>
-            <Input type="text" name="currency" id="currency" placeholder="USD, EUR, etc." defaultValue={defaults?.currency} />
-
-            <Label htmlFor="currencySymbol">Currency Symbol</Label>
-            <Input type="text" name="currencySymbol" id="currencySymbol" placeholder="$, €, etc." defaultValue={defaults?.currencySymbol} />
+            <Select name="currency" id="currency" defaultValue={defaults?.currency}>
+              {CURRENCY_SYMBOLS.map(cur => (
+                <option key={cur.code} value={cur.code}>
+                  {cur.symbol} – {cur.label}
+                </option>
+              ))}
+            </Select>
 
             <SubmitButton>Save Preferences</SubmitButton>
         </form>
