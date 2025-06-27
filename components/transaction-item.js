@@ -31,7 +31,16 @@ export default function TransactionItem({
   const typeConfig = typesMap[type] || defaultType;
   const IconComponent = typeConfig.icon;
   const colors = typeConfig.colors;
-  const formattedAmount = useFormatCurrency(amount)
+  const {formattedCurrency, loadingCurrency} = useFormatCurrency(amount)
+
+  if (loadingCurrency) {
+    return <div className="flex text-gray-500 dark:text-gray-400 font-semibold">
+      <div className="grow">Loading…</div>
+      <div className="min-w-[70px] text-right font-semibold"></div>
+      <div className="min-w-[50px]"></div>
+    </div>
+  }
+
   return (<div className="w-full flex items-center">
     <div className="flex items-center mr-4 grow">
       <IconComponent className={`${colors} mr-2 w-4 h-4 hidden sm:block`} />
@@ -42,7 +51,7 @@ export default function TransactionItem({
       {category && <div className="rounded-md text-xs bg-gray-700 dark:bg-gray-100 text-gray-100 dark:text-black px-2 py-0.5">{category}</div>}
     </div>
 
-    <div className="min-w-[70px] text-right">{formattedAmount}</div>
+    <div className="min-w-[70px] text-right">{formattedCurrency}</div>
 
     <div className="min-w-[100px] flex justify-end">
       <TransactionItemEditButton id={id} />
