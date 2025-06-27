@@ -50,7 +50,11 @@ export default function TransactionList({ range, initialTransactions, initialSet
                     <section className="space-y-4">
                         {transactions.map((transaction) => (
                             <div key={transaction.id}>
-                                <TransactionItem {...transaction} onRemoved={handleRemoved(transaction.id)} />
+                                <TransactionItem
+                                    {...transaction}
+                                    onRemoved={handleRemoved(transaction.id)}
+                                    initialSettings={initialSettings} // Ensure this is passed
+                                />
                             </div>
                         ))}
                     </section>
