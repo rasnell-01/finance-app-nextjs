@@ -2,10 +2,10 @@ import { useMemo } from 'react';
 import { useUserSettingsFromSupabase } from '@/lib/userSettingsFromSupabase';
 import { CURRENCY_SYMBOLS } from '@/lib/consts.js';
 
-// Mapping for common currency locales (adjust as needed)
+// Mapping for common currency locales (adjust as needed based on your regions)
 const CURRENCY_LOCALES = {
   USD: 'en-US',
-  EUR: 'en-IE',
+  EUR: 'en-IE', // Adjust to your preferred EUR locale (e.g., fr-FR, de-DE)
   GBP: 'en-GB',
   JPY: 'ja-JP',
   CAD: 'en-CA',
@@ -32,9 +32,7 @@ export const useFormatCurrency = (amount, initialSettings = null) => {
   const currency = typeof settings?.currency === 'string' && settings.currency.length
       ? settings.currency
       : DEFAULT_CURRENCY;
-  const locale = typeof settings?.locale === 'string' && settings.locale.length
-      ? settings.locale
-      : CURRENCY_LOCALES[currency] || DEFAULT_LOCALE;
+  const locale = CURRENCY_LOCALES[currency] || DEFAULT_LOCALE; // Derive locale from currency
 
   // Get currency symbol from CURRENCY_SYMBOLS
   const currencySymbol = CURRENCY_SYMBOLS.find((c) => c.code === currency)?.symbol || currency;
