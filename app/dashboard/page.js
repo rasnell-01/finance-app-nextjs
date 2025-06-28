@@ -17,7 +17,6 @@ export default async function Page({ searchParams }) {
   const range = params?.range ?? 'last30days'
 
   const supabase = await createClient()
-  console.log(await supabase.auth.getUser())
   await ensureUserMetadata(supabase);
 
   return (<div className="space-y-8">
