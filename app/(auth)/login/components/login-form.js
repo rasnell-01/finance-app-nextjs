@@ -1,24 +1,25 @@
 'use client'
-import Input from "@/components/input";
-import {login} from "@/lib/actions";
-import SubmitButton from "@/components/submit-button";
-import { useActionState } from "react";
 
+import LoginFormEmailPassword from "@/app/(auth)/login/components/login-form-email-password";
+import LoginFormOTP from "@/app/(auth)/login/components/login-form-OTP";
 
-const initialState = {
-    message: null,
-    error: false,
-}
+export default function LoginForm() {
+    return <div>
+        <div className='flex flex-col space-y-8 text-center'>
+            <h1 className="text-4xl font-semibold">Welcome Back</h1>
+            <p className="text-sm text-gray-500 dark:text-gray-300">
+                Enter your email and password to continue.
+            </p>
+        </div>
+        <div><LoginFormEmailPassword /></div>
+        <div className='flex flex-col space-y-8 text-center'>
+            <p className="text-sm text-gray-500 dark:text-gray-300">
+                Or enter your email to continue.
+            </p>
 
-export default function LoginForm(){
-    const [state, formAction] = useActionState(login, initialState)
-    return <form action={formAction}>
-        <Input type="email" placeholder="email@email.com" name="email" required />
-        <SubmitButton type="submit" size="sm" className="w-full">
-            Login
-        </SubmitButton>
-        <p className={`${state?.error ? 'text-red-500' : 'text-green-500'}`}>
-            {state?.message}
-        </p>
-    </form>
+        </div>
+        <div><LoginFormOTP /></div>
+        <div></div>
+    </div>
+
 }
