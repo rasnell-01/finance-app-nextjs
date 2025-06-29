@@ -4,7 +4,6 @@ import {loginOTP} from "@/lib/actions";
 import SubmitButton from "@/components/submit-button";
 import { useActionState } from "react";
 
-
 const initialState = {
     message: null,
     error: false,

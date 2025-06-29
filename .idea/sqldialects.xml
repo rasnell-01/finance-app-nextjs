@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="SqlDialectMappings">
+    <file url="file://$PROJECT_DIR$/lib/supabase/sql-definitions/storage-insert-policy.sql" dialect="GenericSQL" />
+    <file url="file://$PROJECT_DIR$/lib/supabase/sql-definitions/storage-select-policy.sql" dialect="GenericSQL" />
+    <file url="file://$PROJECT_DIR$/lib/supabase/sql-definitions/storage-update-delete-policy.sql" dialect="GenericSQL" />
+    <file url="file://$PROJECT_DIR$/lib/supabase/sql-definitions/transactions-delete-policy.sql" dialect="GenericSQL" />
+    <file url="file://$PROJECT_DIR$/lib/supabase/sql-definitions/transactions-insert-policy.sql" dialect="GenericSQL" />
+    <file url="file://$PROJECT_DIR$/lib/supabase/sql-definitions/transactions-select-policy.sql" dialect="GenericSQL" />
+    <file url="file://$PROJECT_DIR$/lib/supabase/sql-definitions/transactions-update-policy.sql" dialect="GenericSQL" />
+  </component>
+</project>

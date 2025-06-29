@@ -35,7 +35,7 @@ export default function SettingsFormPassword({ defaults }) {
 
                 <Input type="password" name="password_confirmation" id="password_confirmation" placeholder="Confirm new password"
                     defaultValue={defaults?.password_confirmation || ''} minLength={8} required/>
-                <SubmitButton type="submit" size="sm" className="w-full"{...(isPending ? { loading: 'true' } : {})}>
+                <SubmitButton type="submit" {...(isPending ? { loading: 'true' } : {})}>
                     Save Password
                 </SubmitButton>
             </form>

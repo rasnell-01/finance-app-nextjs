@@ -1,5 +1,5 @@
 'use client'
-import {updateProfile} from "@/lib/actions";
+import {updateName} from "@/lib/actions";
 import AlertError from "@/components/alert-error";
 import AlertSuccess from "@/components/alert-success";
 import Label from "@/components/label";
@@ -8,8 +8,8 @@ import SubmitButton from "@/components/submit-button";
 import { initialState } from "@/lib/consts";
 import { useActionState } from "react";
 
-export default function SettingsFormProfile({ defaults }) {
-    const [profileState = initialState, profileAction] = useActionState(updateProfile, initialState);
+export default function SettingsFormName({ defaults }) {
+    const [profileState = initialState, profileAction] = useActionState(updateName, initialState);
     return <>
         {/* Profile Section */}
         <form className="space-y-4" action={profileAction}>

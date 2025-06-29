@@ -1,5 +1,4 @@
 'use client'
-
 import LoginFormEmailPassword from "@/app/(auth)/login/components/login-form-email-password";
 import LoginFormOTP from "@/app/(auth)/login/components/login-form-OTP";
 
