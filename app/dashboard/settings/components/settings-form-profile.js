@@ -1,8 +1,7 @@
 'use client'
-import { updateProfile } from "@/lib/actions";
+import {updateProfile} from "@/lib/actions";
 import AlertError from "@/components/alert-error";
 import AlertSuccess from "@/components/alert-success";
-
 import Label from "@/components/label";
 import Input from "@/components/input";
 import SubmitButton from "@/components/submit-button";
@@ -26,11 +25,6 @@ export default function SettingsFormProfile({ defaults }) {
 
             <Label htmlFor="email">User email</Label>
             <Input type="text" name="email" id="email" placeholder="email" defaultValue={defaults?.email} />
-
-            <Label htmlFor="password">Password</Label>
-            <Input type="password" name="password" id="password" placeholder="New password" />
-
-            <Input type="password" name="password_confirmation" id="password_confirmation" placeholder="Confirm new password" />
 
             <SubmitButton>Save Profile</SubmitButton>
         </form>
