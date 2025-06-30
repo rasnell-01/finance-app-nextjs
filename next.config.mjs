@@ -4,23 +4,23 @@ import r2IncrementalCache from '@opennextjs/cloudflare/overrides/incremental-cac
 
 // Enable Cloudflare bindings for local development
 if (process.env.NODE_ENV === 'development') {
-  await setupDevPlatform();
+    await setupDevPlatform();
 }
 
 // Define the Next.js configuration
 const nextConfig = {
-  images: {
-    remotePatterns: [
-      {
-        protocol: 'https',
-        hostname: '**.supabase.co',
-        pathname: '/storage/v1/object/public/**',
-      },
-    ],
-  },
+    images: {
+        remotePatterns: [
+            {
+                protocol: 'https',
+                hostname: '**.supabase.co',
+                pathname: '/storage/v1/object/public/**',
+            },
+        ],
+    },
 };
 
 // Wrap with OpenNext Cloudflare adapter
 export default defineCloudflareConfig(nextConfig, {
-  incrementalCache: r2IncrementalCache,
+    incrementalCache: r2IncrementalCache,
 });
