@@ -7,7 +7,10 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "json-server": "json-server --watch db.json --port 3100"
+    "json-server": "json-server --watch db.json --port 3100",
+    "build-open": "opennextjs-cloudflare build",
+    "preview": "opennextjs-cloudflare build && opennextjs-cloudflare preview",
+    "deploy": "opennextjs-cloudflare build && opennextjs-cloudflare deploy"
   },
   "dependencies": {
     "@faker-js/faker": "^9.8.0",
